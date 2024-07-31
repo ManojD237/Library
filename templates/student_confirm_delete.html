@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Delete Student</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <p>Are you sure you want to delete <strong>{{ student.student_name }}?</strong></p>
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{% url 'student_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+    {% endblock %}
+
+</body>
+</html>

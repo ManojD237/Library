@@ -1,0 +1,16 @@
+<!-- templates/view_book.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ book.book_name }}</title>
+</head>
+<body>
+    <h1>{{ book.book_name }}</h1>
+    <p>Author: {{ book.author }}</p>
+    <p>Publication: {{ book.publication }}</p>
+    <p>Year: {{ book.year }}</p>
+    <a href="{% url 'book_list' %}">Back to Book List</a>
+</body>
+</html>

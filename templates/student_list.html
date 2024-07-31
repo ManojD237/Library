@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        tr th,td {
+            text-align : center
+        }
+    </style>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <div class="container mt-5">
+    <h2 class="text-center mb-4">Students</h2>
+    <a href="{% url 'student_upload' %}" class="btn btn-primary mb-3">Add New Student</a>
+<!--    <div class="mb-4">-->
+<!--        <h3>Recently Viewed Students:</h3>-->
+<!--        <ul>-->
+<!--            {% for student_name in request.session.viewed_students %}-->
+<!--&lt;!&ndash;                {% with student=student_name %}&ndash;&gt;-->
+<!--                    <li><a href="">{{ student.student_name }}</a></li>-->
+<!--&lt;!&ndash;                {% endwith %}&ndash;&gt;-->
+<!--            {% empty %}-->
+<!--                <p>No students viewed yet.</p>-->
+<!--            {% endfor %}-->
+<!--        </ul>-->
+<!--    </div>-->
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Photo</th>
+                <th>Video</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.student_name }}</td>
+                <td>{{ student.student_class }}</td>
+                <td><img src="{{ student.photo.url }}" alt="photo" width="120" height="150"></td>
+                <td>
+                    {% if student.video %}
+                    <video width="200" height="200" controls>
+                        <source src="{{ student.video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    {% endif %}
+                </td>
+                <td><a href="{% url 'student_update' student.pk %}" class="btn btn-warning btn-sm">Edit</a></td>
+                <td><a href="{% url 'student_delete' student.pk %}" class="btn btn-danger btn-sm">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    {% endblock %}
+
+</body>
+</html>
